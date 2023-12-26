@@ -1,0 +1,24 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $clients = \App\Models\Client::factory(10)->create();
+
+        $clients->each(function ($client) {
+            \App\Models\Order::factory(10)->create([
+                'client_id' => $client->id
+            ]);
+        });
+    }
+}
